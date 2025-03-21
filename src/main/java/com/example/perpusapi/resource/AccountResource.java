@@ -1,5 +1,6 @@
 package com.example.perpusapi.resource;
 
+import com.example.perpusapi.middleware.AuthRequired;
 import com.example.perpusapi.model.Account;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -8,6 +9,7 @@ import jakarta.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
+@AuthRequired
 @Path("/accounts")  // Endpoint: /api/accounts
 public class AccountResource {
 
