@@ -7,15 +7,16 @@ import com.nimbusds.jwt.*;
 import java.util.Date;
 
 public class TokenUtil {
-    private static final String SECRET = "supersecretkeyyoushouldchangethis12345"; // Ganti dengan secret key yang lebih aman
-    private static final long EXPIRATION_TIME = 86400000; // 1 hari dalam milidetik
+    private static final String SECRET = "supersecretkeyyoushouldchangethis12345";
+    private static final long EXPIRATION_TIME = 86400000;
 
     public static String generateToken(String email) {
         try {
             JWSSigner signer = new MACSigner(SECRET.getBytes());
 
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                    .subject(email)
+                    .subject(email) //Ini Payload
+//                    .claim("userId", userId)
                     .issueTime(new Date())
                     .expirationTime(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                     .build();
@@ -40,6 +41,16 @@ public class TokenUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static String getEmailFromToken(String token) {
+        try {
+            SignedJWT signedJWT = SignedJWT.parse(token);
+            return signedJWT.getJWTClaimsSet().getSubject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

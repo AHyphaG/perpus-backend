@@ -6,6 +6,8 @@ import com.example.perpusapi.model.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class AccountRepository {
@@ -95,5 +97,28 @@ public class AccountRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<Account> getAll(){
+        String sql = "SELECT * FROM account";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            List<Account> listAcc = new ArrayList<>();
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Account account = new Account(
+                        rs.getInt("user_id"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                );
+                listAcc.add(account);
+            }
+            return listAcc;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

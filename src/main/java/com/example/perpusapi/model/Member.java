@@ -1,5 +1,7 @@
 package com.example.perpusapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,21 +9,15 @@ import java.sql.SQLException;
  *
  * @author alfin
  */
-public class Member extends Model<Member>{
+public class Member extends Account{
     private int member_id;
     private String nama_depan;
     private String nama_belakang;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate tanggal_lahir;
     private int account_id_fk;
 
-    public Member(){
-        this.table = "Member";
-        this.primaryKey = "member_id";
-    }
-
     public Member(int member_id, String nama_depan, String nama_belakang, LocalDate tanggal_lahir, int account_id_fk) {
-        this.table = "Member";
-        this.primaryKey = "member_id";
         this.member_id = member_id;
         this.nama_depan = nama_depan;
         this.nama_belakang = nama_belakang;
@@ -29,20 +25,6 @@ public class Member extends Model<Member>{
         this.account_id_fk = account_id_fk;
     }
 
-    @Override
-    public Member toModel(ResultSet rs){
-        try{
-            return new Member(
-                    rs.getInt("member_id"),
-                    rs.getString("nama_depan"),
-                    rs.getString("nama_belakang"),
-                    rs.getDate("tanggal_lahir").toLocalDate(),
-                    rs.getInt("account_id_fk")
-            );
-        } catch (SQLException e) {
-            return null;
-        }
-    }
 
     public int getMember_id() {
         return member_id;
