@@ -76,6 +76,17 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.5</version> <!-- atau versi sesuai Jackson kamu -->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.18.1</version>
+        </dependency>
+
 
     </dependencies>
 
