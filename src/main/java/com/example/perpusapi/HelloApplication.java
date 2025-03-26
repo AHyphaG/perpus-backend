@@ -21,6 +21,7 @@ public class HelloApplication extends Application {
         resources.add(com.example.perpusapi.resource.AccountResource.class);
         resources.add(com.example.perpusapi.resource.DatabaseResource.class);
         resources.add(com.example.perpusapi.config.JacksonConfig.class);
+        resources.add(com.example.perpusapi.resource.BookResource.class);
         // ======= Providers dan Resources =======
         return resources;
     }
